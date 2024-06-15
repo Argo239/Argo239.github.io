@@ -89,7 +89,7 @@
 <body>
     <button id="startButton">点我！！！</button>
     <div id="mainPage">
-        <div id="message">蔼婷18岁生日快乐！！！🎂🎉</div>
+        <div id="message">大厨<br>18岁生日快乐！！！🎂🎉</div>
         <div id="continue">请点击任意处继续</div>
         <div id="audioControl" class="playing"></div>
     </div>
@@ -103,13 +103,15 @@
         });
 
         document.getElementById('mainPage').addEventListener('click', function() {
-            let messages = ["祝你心想事成", "前程似锦"];
+            let messages = ["祝你心想事成", "前程似锦", "早日当上米其林⭐⭐⭐大厨~~"];
             let currentMessage = document.getElementById('message').innerText;
 
             if (currentMessage.includes("生日快乐")) {
                 document.getElementById('message').innerText = messages[0];
             } else if (currentMessage.includes(messages[0])) {
                 document.getElementById('message').innerText = messages[1];
+            } else if (currentMessage.includes(messages[1])) {
+                document.getElementById('message').innerText = messages[2];
                 document.getElementById('continue').style.display = 'none'; // 隐藏“请点击任意处继续”
             }
         });
