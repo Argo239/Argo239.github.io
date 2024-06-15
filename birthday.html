@@ -71,6 +71,19 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
         }
+        #audioControl {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background-image: url('https://img.icons8.com/ios-filled/50/000000/play.png');
+            background-size: cover;
+            cursor: pointer;
+        }
+        #audioControl.playing {
+            background-image: url('https://img.icons8.com/ios-filled/50/000000/pause.png');
+        }
     </style>
 </head>
 <body>
@@ -78,12 +91,15 @@
     <div id="mainPage">
         <div id="message">生日快乐！🎂🎉</div>
         <div id="continue">请点击任意处继续</div>
+        <div id="audioControl" class="playing"></div>
     </div>
+    <audio id="birthdaySong" src=".\格格 - 生日祝福歌.mp3"></audio>
     <script>
         document.getElementById('startButton').addEventListener('click', function() {
             document.getElementById('startButton').style.display = 'none';
             document.getElementById('mainPage').style.display = 'block';
             startFallingCakes();
+            playAudio();
         });
 
         document.getElementById('mainPage').addEventListener('click', function() {
@@ -107,6 +123,22 @@
                 cake.style.animationDelay = Math.random() + 's';
                 document.getElementById('mainPage').appendChild(cake);
             }
+        }
+
+        function playAudio() {
+            let audio = document.getElementById('birthdaySong');
+            let audioControl = document.getElementById('audioControl');
+            audio.play();
+            audioControl.classList.add('playing');
+            audioControl.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play();
+                    audioControl.classList.add('playing');
+                } else {
+                    audio.pause();
+                    audioControl.classList.remove('playing');
+                }
+            });
         }
     </script>
 </body>
