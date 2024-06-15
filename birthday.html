@@ -14,6 +14,7 @@
             justify-content: center;
             align-items: center;
             background-color: #f0f0f0;
+            flex-direction: column;
         }
         #startButton {
             padding: 20px 40px;
@@ -31,6 +32,7 @@
             position: relative;
             overflow: hidden;
             background-color: #ffcccb;
+            flex: 1;
         }
         .cake {
             position: absolute;
@@ -54,18 +56,46 @@
             text-shadow: 2px 2px 4px #000;
             text-align: center;
         }
+        #continue {
+            font-size: 20px;
+            color: white;
+            text-shadow: 1px 1px 2px #000;
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            text-align: center;
+            border-bottom: 2px solid white;
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
-    <button id="startButton">点击开始</button>
+    <button id="startButton">点我！！！</button>
     <div id="mainPage">
         <div id="message">生日快乐！🎂🎉</div>
+        <div id="continue">请点击任意处继续</div>
     </div>
     <script>
         document.getElementById('startButton').addEventListener('click', function() {
             document.getElementById('startButton').style.display = 'none';
             document.getElementById('mainPage').style.display = 'block';
             startFallingCakes();
+        });
+
+        document.getElementById('mainPage').addEventListener('click', function() {
+            let messages = ["祝你心想事成", "前程似锦"];
+            let currentMessage = document.getElementById('message').innerText;
+
+            if (currentMessage.includes("生日快乐")) {
+                document.getElementById('message').innerText = messages[0];
+            } else if (currentMessage.includes(messages[0])) {
+                document.getElementById('message').innerText = messages[1];
+                document.getElementById('continue').style.display = 'none'; // 隐藏“请点击任意处继续”
+            }
         });
 
         function startFallingCakes() {
